@@ -1,8 +1,5 @@
-# Sideload the HM-KNX DCA AddIn into ETS6's AddIns directory.
-# This bypasses the KNX-Association certificate check that the App-Manager
-# performs on .etsapp install - ETS only validates the signature when
-# importing via the GUI, not when reading already-extracted AddIn folders
-# from C:\ProgramData\KNX\ETS6\Apps\AddIns\<AppId>\.
+# Sideload the HM-KNX DCA AddIn into ETS6's AddIns directory by copying the
+# built DLL and manifest to C:\ProgramData\KNX\ETS6\Apps\AddIns\<AppId>\.
 $ErrorActionPreference = 'Stop'
 
 $AppId    = 'M00FA-A4805'

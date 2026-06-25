@@ -1,9 +1,8 @@
 // HM-KNX ETS6 DCA - entry point.
 //
-// Uses the modern AddIn pattern (System.AddIn + IDeviceConfigurationAddIn),
-// not the deprecated MultiPassDownloadPluginBase. ETS6 instantiates this
-// class when the user activates the DCA tab on a device whose
-// ApplicationProgram Id is listed in AddInManifest.xml.
+// Uses the modern AddIn pattern (System.AddIn + IDeviceConfigurationAddIn).
+// ETS6 instantiates this class when the user activates the DCA tab on a
+// device whose ApplicationProgram Id is listed in AddInManifest.xml.
 //
 // The UI is built in code in DcaUserInterface (WPF UserControl).
 

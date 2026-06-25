@@ -11,7 +11,7 @@
     <NoWarn>$(NoWarn);CS0618;NU1701;NU1702</NoWarn>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
-    <!-- WPF DLLs are referenced directly instead of using the WindowsDesktop SDK. -->
+    <!-- WPF DLLs are referenced directly (see the Reference items below). -->
     <UseWPF>false</UseWPF>
     <UseWindowsForms>false</UseWindowsForms>
   </PropertyGroup>

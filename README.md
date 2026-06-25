@@ -12,6 +12,15 @@ ETS6-DCA-AddIn-Oberfläche, erstellt mit der
 > DPTs und Flags in ETS dar, sodass Gruppenadressen visuell zugewiesen werden
 > können.
 
+Damit erscheint das Gerät in ETS mit benannten Gruppenobjekten; die optionale
+DCA-Oberfläche liest und schreibt die KO-Konfiguration direkt aus ETS.
+
+![Kommunikationsobjekte des HM-KNX in ETS mit zugewiesenen Gruppenadressen](docs/ets-gruppenobjekte.png)
+*ETS-Ansicht „Kommunikationsobjekte": benannte KOs mit DPTs, Flags und Gruppenadressen (aus der knxprod).*
+
+![DCA-Tab der HM-KNX-AddIn in ETS](docs/ets-dca.png)
+*Optionaler DCA-Tab: Identify, Lesen/Schreiben der KO-Konfiguration, Neustart und ProgMode direkt aus ETS.*
+
 ## Inhalt
 
 - `knxprod/HM-KNX.xml` - selbstständige Quell-XML der ETS-Produktdatei (Catalog,
@@ -22,10 +31,9 @@ ETS6-DCA-AddIn-Oberfläche, erstellt mit der
 
 ## Voraussetzungen
 
-Ein frisch installiertes Windows enthält weder einen .NET-Compiler noch den
-OpenKNXproducer. Zusätzlich zu ETS6 werden daher zwei Werkzeuge benötigt. Alle
-Beispiele unten gehen von einer **PowerShell**-Konsole im Wurzelverzeichnis dieses
-Repos aus.
+Neben ETS6 werden zwei Werkzeuge benötigt: ein .NET SDK (zum Kompilieren der DCA)
+und der OpenKNXproducer (erzeugt und signiert die knxprod). Alle Beispiele unten
+gehen von einer **PowerShell**-Konsole im Wurzelverzeichnis dieses Repos aus.
 
 ### ETS6
 
@@ -34,7 +42,7 @@ Standard-Installationspfad: `C:\Program Files (x86)\ETS6\`.
 
 ### .NET SDK (nur für den Bau der DCA)
 
-Der OpenKNXproducer bringt seine eigene Laufzeit mit; ein .NET SDK wird **nur**
+Der OpenKNXproducer bringt seine eigene Runtime mit; ein .NET SDK wird **nur**
 zum Kompilieren der DCA gebraucht. Installation z.B. per winget:
 
 ```powershell
@@ -69,9 +77,9 @@ Code und wird als fertiges Release bezogen (getestet mit **v4.3.9**):
    verkürzen will, fügt `%USERPROFILE%\bin` einmalig zur PATH-Umgebungsvariable
    hinzu.
 
-> **PowerShell-Ausführungsrichtlinie:** Auf einem frischen Windows sind
-> unsignierte Skripte standardmäßig blockiert. Die `.ps1`-Skripte hier deshalb
-> wie gezeigt mit `PowerShell -ExecutionPolicy Bypass -File <skript>` starten.
+> **PowerShell-Ausführungsrichtlinie:** Die `.ps1`-Skripte hier sind nicht
+> signiert und werden daher wie gezeigt mit
+> `PowerShell -ExecutionPolicy Bypass -File <skript>` gestartet.
 
 ## knxprod bauen
 
@@ -112,9 +120,8 @@ Die DCA-AddIn ergänzt im ETS einen Konfigurations-Tab für das Gerät.
    dotnet build -c Release dca\HM-KNX.Dca.csproj
    ```
 
-2. Installieren (Sideload). ETS prüft die Signatur einer `.etsapp` nur beim
-   GUI-Import, nicht beim Lesen eines bereits entpackten AddIn-Ordners. Das Skript
-   kopiert DLL + Manifest direkt in das ETS6-AddIns-Verzeichnis:
+2. Installieren (Sideload). Das Skript kopiert DLL + Manifest in das
+   ETS6-AddIns-Verzeichnis:
 
    ```powershell
    # ETS6 vorher schließen!

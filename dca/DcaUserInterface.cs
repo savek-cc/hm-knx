@@ -1,5 +1,4 @@
-// HM-KNX DCA panel - code-only WPF (no XAML), so it builds without
-// the WindowsDesktop SDK.
+// HM-KNX DCA panel - a code-only WPF UserControl.
 
 using System;
 using System.Collections.Generic;
