@@ -1,6 +1,6 @@
 # Sideload the HM-KNX DCA AddIn into ETS6's AddIns directory.
 # This bypasses the KNX-Association certificate check that the App-Manager
-# performs on .etsapp install — ETS only validates the signature when
+# performs on .etsapp install - ETS only validates the signature when
 # importing via the GUI, not when reading already-extracted AddIn folders
 # from C:\ProgramData\KNX\ETS6\Apps\AddIns\<AppId>\.
 $ErrorActionPreference = 'Stop'
@@ -16,7 +16,7 @@ Write-Host "Source manifest: $Manifest"
 Write-Host "Target:          $Target"
 Write-Host ""
 
-if (-not (Test-Path "$Source\HM-KNX.Dca.dll")) { throw "DLL not built — run: dotnet build -c Release dca\HM-KNX.Dca.csproj" }
+if (-not (Test-Path "$Source\HM-KNX.Dca.dll")) { throw "DLL not built - run: dotnet build -c Release dca\HM-KNX.Dca.csproj" }
 if (-not (Test-Path $Manifest))                { throw "Manifest missing: $Manifest" }
 
 # Make sure ETS6 is closed; otherwise the running instance can hold a lock

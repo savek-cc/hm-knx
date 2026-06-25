@@ -1,4 +1,4 @@
-# Build artifacts — sources only
+# Build artifacts - sources only
 bin/
 obj/
 *.user

@@ -1,4 +1,4 @@
-// HM-KNX DCA panel — code-only WPF (no XAML), so it builds without
+// HM-KNX DCA panel - code-only WPF (no XAML), so it builds without
 // the WindowsDesktop SDK.
 
 using System;
@@ -35,8 +35,8 @@ public sealed class DcaUserInterface : UserControl, IDisposable
     private DeviceManagement? _dmConnected;
     private readonly object _busLock = new();
 
-    private readonly TextBlock _devicePaText = new() { Text = "—" };
-    private readonly TextBlock _deviceVersionText = new() { Text = "—" };
+    private readonly TextBlock _devicePaText = new() { Text = "-" };
+    private readonly TextBlock _deviceVersionText = new() { Text = "-" };
     private readonly TextBlock _statusText = new() { Text = "bereit", Foreground = Brushes.DarkGreen };
     private readonly TextBox _logBox = new()
     {
@@ -86,7 +86,7 @@ public sealed class DcaUserInterface : UserControl, IDisposable
         _device = device;
         _initializationContext = ctx;
         BuildUi();
-        _devicePaText.Text = device?.Address?.ToString() ?? "—";
+        _devicePaText.Text = device?.Address?.ToString() ?? "-";
         _deviceVersionText.Text = "HM2KNX (15 KOs)";
         ReloadFromProject();
     }
@@ -98,7 +98,7 @@ public sealed class DcaUserInterface : UserControl, IDisposable
             grid.RowDefinitions.Add(new RowDefinition { Height = i == 3 ? new GridLength(1, GridUnitType.Star) : GridLength.Auto });
 
         // Row 0: Header
-        var header = new TextBlock { Text = "HM-KNX (Hörmann Garagentor) — DCA",
+        var header = new TextBlock { Text = "HM-KNX (Hörmann Garagentor) - DCA",
                                      FontSize = 16, FontWeight = FontWeights.Bold };
         Grid.SetRow(header, 0);
         grid.Children.Add(header);
@@ -247,7 +247,7 @@ public sealed class DcaUserInterface : UserControl, IDisposable
 
     private async void IdentifyButton_Click(object sender, RoutedEventArgs e)
     {
-        await RunBusOpAsync("Identifying…", "Identify", dm =>
+        await RunBusOpAsync("Identifying...", "Identify", dm =>
         {
             // Read the 4 standard descriptor properties at fixed PIDs.
             // These all use KNX-spec start_index=1. Avoids the bonus
@@ -301,7 +301,7 @@ public sealed class DcaUserInterface : UserControl, IDisposable
                     return (true, op(dm), (Exception?)null);
                 }
                 catch (Exception ex) { return (false, (string?)null, ex); }
-                // Note: no Disconnect in finally — DM stays cached. Disposed
+                // Note: no Disconnect in finally - DM stays cached. Disposed
                 // when the user navigates away from the DCA tab.
             });
 
@@ -328,7 +328,7 @@ public sealed class DcaUserInterface : UserControl, IDisposable
         // Connectionless mode avoids ETS' strict TPCI stack, which rejects
         // this firmware's valid PropertyValue_Response frames.
         var newFlags = new Dictionary<int, byte>();
-        await RunBusOpAsync("Reading…", "Read", dm =>
+        await RunBusOpAsync("Reading...", "Read", dm =>
         {
             var probeKo1 = TryReadByte(dm, 11, 1);
             if (probeKo1 == null)
@@ -367,7 +367,7 @@ public sealed class DcaUserInterface : UserControl, IDisposable
 
     /// <summary>Read 1 byte from a homebrew property on IO 10/11. The HM-KNX
     /// firmware only honors wire start_index=0 here (start=1 elicits no
-    /// response → 5s ETS timeout). We skip the standard start=1 probe
+    /// response -> 5s ETS timeout). We skip the standard start=1 probe
     /// entirely to keep per-KO read time near bus latency.</summary>
     private static byte? TryReadByte(DeviceManagement dm, byte obj, byte pid)
     {
@@ -394,7 +394,7 @@ public sealed class DcaUserInterface : UserControl, IDisposable
         var snap = _rows.Select(r => (r.Index, r.FlagsByte,
             GAs: r.GroupAddresses.Select(g => g.Address).ToList())).ToList();
 
-        await RunBusOpAsync("Writing…", "Write", dm =>
+        await RunBusOpAsync("Writing...", "Write", dm =>
         {
             int writes = 0;
             foreach (var row in snap)
@@ -428,12 +428,12 @@ public sealed class DcaUserInterface : UserControl, IDisposable
                 writeOptions: WriteOptions.NoVerify);
             writes++;
             return $"Wrote {writes} property entries.";
-        }, connectionless: true);   // firmware echoes responses to writes too — same T_NACK avoidance as Read
+        }, connectionless: true);   // firmware echoes responses to writes too - same T_NACK avoidance as Read
     }
 
     private async void RestartButton_Click(object sender, RoutedEventArgs e)
     {
-        await RunBusOpAsync("Restarting…", "Restart", dm =>
+        await RunBusOpAsync("Restarting...", "Restart", dm =>
         {
             dm.Restart();
             return "Device restarted.";
@@ -442,7 +442,7 @@ public sealed class DcaUserInterface : UserControl, IDisposable
 
     private async void ProgmodeButton_Click(object sender, RoutedEventArgs e)
     {
-        await RunBusOpAsync("Toggling prog mode…", "ProgMode", dm =>
+        await RunBusOpAsync("Toggling prog mode...", "ProgMode", dm =>
         {
             dm.WriteMemory(ResourceAddressSpace.StandardMemory, 0x60,
                 data: new byte[] { 0x81 },
@@ -502,7 +502,7 @@ public readonly struct GaAssignment
     public GaAssignment(ushort address, string name) { Address = address; Name = name; }
     public string Format() =>
         (Address >> 11) + "/" + ((Address >> 8) & 7) + "/" + (Address & 0xff)
-        + (string.IsNullOrEmpty(Name) ? "" : " — " + Name);
+        + (string.IsNullOrEmpty(Name) ? "" : " - " + Name);
 }
 
 public sealed class KoRow

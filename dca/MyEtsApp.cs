@@ -1,4 +1,4 @@
-// HM-KNX ETS6 DCA — entry point.
+// HM-KNX ETS6 DCA - entry point.
 //
 // Uses the modern AddIn pattern (System.AddIn + IDeviceConfigurationAddIn),
 // not the deprecated MultiPassDownloadPluginBase. ETS6 instantiates this
