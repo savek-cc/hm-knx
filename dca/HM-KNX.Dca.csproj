@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- ETS6 loads AddIns as .NET Framework 4.8 + WPF assemblies (System.AddIn pattern).
+         We compile against net48 reference assemblies; runtime is the user's Windows host. -->
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>HM-KNX.Dca</AssemblyName>
+    <RootNamespace>HmKnx.Dca</RootNamespace>
+    <Version>0.1.0</Version>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <NoWarn>$(NoWarn);CS0618;NU1701;NU1702</NoWarn>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <!-- WPF DLLs are referenced directly instead of using the WindowsDesktop SDK. -->
+    <UseWPF>false</UseWPF>
+    <UseWindowsForms>false</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!-- ETS provides these DLLs at runtime (Private=false). -->
+  <PropertyGroup>
+    <!-- ETS DLL location: the ETS6 installation on Windows, or $HOME/bin/CV/6.3 on Linux. -->
+    <EtsDllPath Condition="'$(OS)' == 'Windows_NT'">C:\Program Files (x86)\ETS6\</EtsDllPath>
+    <EtsDllPath Condition="'$(OS)' != 'Windows_NT'">$([System.Environment]::GetEnvironmentVariable('HOME'))/bin/CV/6.3/</EtsDllPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Knx.Ets.Sdk">
+      <HintPath>$(EtsDllPath)Knx.Ets.Sdk.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Knx.Ets.Common.Types">
+      <HintPath>$(EtsDllPath)Knx.Ets.Common.Types.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Knx.Ets.Sdk.AddIns.AddInViews">
+      <HintPath>$(EtsDllPath)Knx.Ets.Sdk.AddIns.AddInViews.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Knx.Ets.Xml.ObjectModel">
+      <HintPath>$(EtsDllPath)Knx.Ets.Xml.ObjectModel.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.AddIn" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="AddInManifest.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

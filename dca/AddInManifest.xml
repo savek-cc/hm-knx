@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Knxapp AppId="M00FA-A4805" AddInAssembly="HM-KNX.Dca.dll">
+  <Configuration IsSingleInstanceAddIn="false" HasConfigurationDialog="false" AddToContentSwitcher="false" AddToMainToolbar="false" Is64BitCompatible="true"/>
+  <DisplayNames>
+    <DisplayName LanguageId="de-DE" Name="HM-KNX (Hörmann Garagentor)" />
+    <DisplayName LanguageId="en-US" Name="HM-KNX (Hörmann garage door)" />
+  </DisplayNames>
+  <AddInToolbarButtons />
+  <DeviceConfiguration>
+    <ApplicationProgram Id="M-00FA_A-4805-05-0D9F" />
+  </DeviceConfiguration>
+</Knxapp>

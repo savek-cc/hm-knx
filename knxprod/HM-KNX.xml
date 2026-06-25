@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<KNX xmlns="http://knx.org/xml/project/23" CreatedBy="HM-KNX" ToolVersion="1.0">
+  <ManufacturerData>
+    <Manufacturer RefId="M-00FA">
+      <Catalog>
+        <CatalogSection Id="M-00FA_CS-Default" Name="KNX Association" Number="HMKNX" DefaultLanguage="de-DE">
+          <CatalogItem Id="M-00FA_H-0xHMKNX-1_HP-4805-05-0001_CI-HM2KNX" Name="HM-KNX (Hörmann garage door interface)" Number="1" ProductRefId="M-00FA_H-0xHMKNX-1_P-HM2KNX" Hardware2ProgramRefId="M-00FA_H-0xHMKNX-1_HP-4805-05-0001" DefaultLanguage="de-DE" />
+        </CatalogSection>
+      </Catalog>
+      <ApplicationPrograms>
+        <ApplicationProgram Id="M-00FA_A-4805-05-0001" ProgramType="ApplicationProgram" MaskVersion="MV-0021" Name="HM-KNX" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de-DE" DynamicTableManagement="false" Linkable="false" MinEtsVersion="5.0" ApplicationNumber="18437" ApplicationVersion="5">
+          <Static>
+            <Code>
+              <AbsoluteSegment Id="M-00FA_A-4805-05-0001_AS-0000" Address="0" Size="0" />
+            </Code>
+            <ComObjectTable>
+              <ComObject Id="M-00FA_A-4805-05-0001_O-1" Name="Open-Close" Text="Open-Close" Number="1" FunctionText="Open or close garage door" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Disabled" WriteFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-9" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-2" Name="Stop" Text="Stop" Number="2" FunctionText="Stop garage door if moving" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Disabled" WriteFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-10" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-3" Name="Vent" Text="Vent" Number="3" FunctionText="Open garage door for venting" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Disabled" WriteFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-1" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-4" Name="Light" Text="Light" Number="4" FunctionText="Toggles the light" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Disabled" WriteFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-12" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-5" Name="Drive Lock" Text="Drive Lock" Number="5" FunctionText="Locks the drive (rf-remote and switches)" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Enabled" WriteFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Enabled" DatapointType="DPST-1-1" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-6" Name="KNX Lock" Text="KNX Lock" Number="6" FunctionText="Locks only the KNX-interface" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Enabled" WriteFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Enabled" DatapointType="DPST-1-1" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-7" Name="Status Open" Text="Status Open" Number="7" FunctionText="1 if door is completely open" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Enabled" WriteFlag="Disabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-8" Name="Status Closed" Text="Status Closed" Number="8" FunctionText="1 if door is completely closed" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Enabled" WriteFlag="Disabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-9" Name="Status Venting" Text="Status Venting" Number="9" FunctionText="1 if door is at venting position" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Enabled" WriteFlag="Disabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-10" Name="Status Moving" Text="Status Moving" Number="10" FunctionText="1 if door is moving" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Enabled" WriteFlag="Disabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-11" Name="Status Moving Up" Text="Status Moving Up" Number="11" FunctionText="1 if door is moving up (S3)" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Enabled" WriteFlag="Disabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-12" Name="Status Moving Down" Text="Status Moving Down" Number="12" FunctionText="1 if door is moving down (S3)" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Enabled" WriteFlag="Disabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-13" Name="Status Pre-Warn" Text="Status Pre-Warn" Number="13" FunctionText="1 if door is about to move down (S3)" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Enabled" WriteFlag="Disabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-14" Name="Status Light" Text="Status Light" Number="14" FunctionText="1 if light is switched on" ObjectSize="1 Bit" CommunicationFlag="Enabled" ReadFlag="Enabled" WriteFlag="Disabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPST-1-2" />
+              <ComObject Id="M-00FA_A-4805-05-0001_O-15" Name="Status Error" Text="Status Error" Number="15" FunctionText="Error code, 0 if no error" ObjectSize="4 Bytes" CommunicationFlag="Enabled" ReadFlag="Enabled" WriteFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" DatapointType="DPT-12" />
+            </ComObjectTable>
+            <ComObjectRefs>
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-1_R-11" RefId="M-00FA_A-4805-05-0001_O-1" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-2_R-21" RefId="M-00FA_A-4805-05-0001_O-2" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-3_R-31" RefId="M-00FA_A-4805-05-0001_O-3" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-4_R-41" RefId="M-00FA_A-4805-05-0001_O-4" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-5_R-51" RefId="M-00FA_A-4805-05-0001_O-5" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-6_R-61" RefId="M-00FA_A-4805-05-0001_O-6" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-7_R-71" RefId="M-00FA_A-4805-05-0001_O-7" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-8_R-81" RefId="M-00FA_A-4805-05-0001_O-8" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-9_R-91" RefId="M-00FA_A-4805-05-0001_O-9" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-10_R-101" RefId="M-00FA_A-4805-05-0001_O-10" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-11_R-111" RefId="M-00FA_A-4805-05-0001_O-11" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-12_R-121" RefId="M-00FA_A-4805-05-0001_O-12" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-13_R-131" RefId="M-00FA_A-4805-05-0001_O-13" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-14_R-141" RefId="M-00FA_A-4805-05-0001_O-14" />
+              <ComObjectRef Id="M-00FA_A-4805-05-0001_O-15_R-151" RefId="M-00FA_A-4805-05-0001_O-15" />
+            </ComObjectRefs>
+            <AddressTable MaxEntries="254" />
+            <AssociationTable MaxEntries="254" />
+            <LoadProcedures>
+              <LoadProcedure />
+            </LoadProcedures>
+          </Static>
+          <Dynamic>
+            <Channel Id="M-00FA_A-4805-05-0001_CH-1" Number="1" Name="HMKNX_Main" Text="Hörmann garage door">
+              <ParameterBlock Id="M-00FA_A-4805-05-0001_PB-1" Name="ComObjects" Text="Kommunikationsobjekte">
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-1_R-11" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-2_R-21" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-3_R-31" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-4_R-41" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-5_R-51" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-6_R-61" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-7_R-71" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-8_R-81" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-9_R-91" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-10_R-101" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-11_R-111" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-12_R-121" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-13_R-131" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-14_R-141" />
+              <ComObjectRefRef RefId="M-00FA_A-4805-05-0001_O-15_R-151" />
+              </ParameterBlock>
+            </Channel>
+          </Dynamic>
+        </ApplicationProgram>
+      </ApplicationPrograms>
+      <Hardware>
+        <Hardware Id="M-00FA_H-0xHMKNX-1" Name="HM-KNX" SerialNumber="0xHMKNX" VersionNumber="1" BusCurrent="10" HasIndividualAddress="true" HasApplicationProgram="true">
+          <Products>
+            <Product Id="M-00FA_H-0xHMKNX-1_P-HM2KNX" Text="HM-KNX (Hörmann garage door interface)" OrderNumber="HM2KNX" IsRailMounted="false" DefaultLanguage="de-DE">
+              <RegistrationInfo RegistrationStatus="Registered" />
+            </Product>
+          </Products>
+          <Hardware2Programs>
+            <Hardware2Program Id="M-00FA_H-0xHMKNX-1_HP-4805-05-0001" MediumTypes="MT-0">
+              <ApplicationProgramRef RefId="M-00FA_A-4805-05-0001" />
+              <RegistrationInfo RegistrationStatus="Registered" />
+            </Hardware2Program>
+          </Hardware2Programs>
+        </Hardware>
+      </Hardware>
+    </Manufacturer>
+  </ManufacturerData>
+</KNX>

@@ -1,0 +1,18 @@
+# Build artifacts — sources only
+bin/
+obj/
+*.user
+*.suo
+
+# .NET
+*.dll
+*.pdb
+
+# Build outputs
+*.knxprod
+*.etsapp
+*.signature
+
+# OS / editor
+.vs/
+.DS_Store
