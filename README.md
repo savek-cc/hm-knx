@@ -101,14 +101,19 @@ OPENSSL_CONF=scripts/openssl-sha1.cnf \
   OpenKNXproducer knxprod -o HM-KNX.knxprod knxprod/HM-KNX.xml
 ```
 
-### Hinweis zur Applikations-ID (wichtig für die DCA)
+### Hinweis zur Applikations-ID (DCA)
 
-Beim Signieren ersetzt ETS die ID der Applikation durch einen Inhalts-Hash. Für die
-mitgelieferte `HM-KNX.xml` lautet sie `M-00FA_A-4805-05-0D9F`; das DCA-Manifest
-(`dca/AddInManifest.xml`) ist darauf gebunden. Wird die `HM-KNX.xml` geändert oder
-mit einer anderen ETS-Version signiert, ändert sich diese ID - dann muss die
-`ApplicationProgram Id` in `dca/AddInManifest.xml` an die ID der gebauten knxprod
-angepasst werden.
+Beim Signieren ersetzt ETS das letzte Segment der Applikations-ID durch einen
+Inhalts-Hash (für die mitgelieferte `HM-KNX.xml`: `M-00FA_A-4805-05-0D9F`). Das
+DCA-Manifest (`dca/AddInManifest.xml`) verweist über die `ApplicationProgram Id`
+auf diese Applikation.
+
+ETS ordnet die DCA dem Gerät **ohne** dieses Hash-Segment zu (Präfix-Vergleich
+`M-00FA_A-4805-05`): die Manifest-ID muss nur mit diesem Präfix beginnen. Ein
+Neubau der `HM-KNX.xml` mit anderer ETS-Version ändert nur den Hash und macht
+daher **keine** Anpassung des Manifests nötig. Nur wenn sich **AppNummer** (4805)
+oder **Applikationsversion** (05) ändern, muss die ID im Manifest mitgezogen
+werden.
 
 ## DCA bauen & installieren
 
@@ -121,12 +126,26 @@ Die DCA-AddIn ergänzt im ETS einen Konfigurations-Tab für das Gerät.
    ```
 
 2. Installieren (Sideload). Das Skript kopiert DLL + Manifest in das
-   ETS6-AddIns-Verzeichnis:
+   ETS6-AddIns-Verzeichnis und signiert den AddIn-Ordner mit dem Signierer der
+   installierten ETS (`Knx.Ets.XmlSigning.dll` - derselbe, der auch die knxprod
+   signiert; kein privater Schlüssel nötig):
 
    ```powershell
    # ETS6 vorher schließen!
    PowerShell -ExecutionPolicy Bypass -File .\scripts\sideload-dca.ps1
    ```
 
-   Erscheint der DCA-Tab nicht, ETS6 schließen,
-   `%LocalAppData%\Knx\ETS6\AddInsCache` löschen und ETS6 neu starten.
+   Liegt die ETS nicht unter dem Standardpfad, den Pfad angeben:
+   `… -File .\scripts\sideload-dca.ps1 -EtsPath "D:\ETS6"`.
+
+   Die Signatur ist **optional**: Auf einer lizenzierten ETS erscheint der
+   DCA-Tab auch ohne sie; sie sorgt nur dafür, dass ETS die App als signiert
+   führt (wie die Hersteller-Apps). Findet das Skript keine ETS-DLL,
+   installiert es unsigniert weiter.
+
+   **Der DCA-Tab erscheint nur in einer lizenzierten ETS** (Lite / Home /
+   Professional). Die **ETS Demo** blendet DCA-Tabs grundsätzlich für *alle*
+   Geräte aus - das ist eine ETS-Einschränkung, nicht ein Problem der App; eine
+   eigene KNX-Lizenz braucht die App nicht (sie ist Freeware). Erscheint der Tab
+   nicht: prüfen, dass das Gerät (nicht der Gebäude-Knoten) ausgewählt ist, und
+   ETS6 einmal neu starten.
