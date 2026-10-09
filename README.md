@@ -28,6 +28,8 @@ DCA-Oberfläche liest und schreibt die KO-Konfiguration direkt aus ETS.
 - `dca/` - C#-Quellen der ETS6-DCA-AddIn (.NET Framework 4.8)
 - `scripts/sideload-dca.ps1` - installiert die AddIn in ETS6
 - `scripts/openssl-sha1.cnf` - OpenSSL-Konfiguration für das Signieren unter Linux
+- `tools/hmknxctl.py` - eigenständiges Python-CLI, das die Geräte-Konfiguration
+  direkt über KNXnet/IP liest und schreibt (ohne ETS)
 
 ## Voraussetzungen
 
@@ -178,3 +180,36 @@ Die weiteren Knöpfe im Tab:
   Programmiermodus um.
 
 Die Ausgabe jeder Aktion erscheint im Log-Feld unten im Tab.
+
+## hmknxctl - Konfiguration per Kommandozeile lesen/schreiben
+
+Unter `tools/hmknxctl.py` liegt ein eigenständiges Python-Tool, das die
+KO-Konfiguration des Geräts **direkt über einen KNXnet/IP-Tunnel** liest und
+schreibt - ohne ETS. Damit lässt sich insbesondere die **aktuell im Gerät
+gespeicherte Konfiguration auslesen** (inklusive Gruppenadressen). Das kann die
+DCA nicht: Die Antwort-Telegramme dieser Firmware werden vom KNX-Stack der ETS
+(Falcon) als „out of sequence" verworfen. Das Tool spricht stattdessen über
+[xknx](https://github.com/XKNX/xknx) und hat diese Einschränkung nicht.
+
+Voraussetzungen: Python 3 sowie `xknx` und `PyYAML`:
+
+```bash
+pip install xknx pyyaml
+```
+
+Beispiele (Gateway-IP und phys. Adresse an die eigene Anlage anpassen):
+
+```bash
+# Gerätekennung anzeigen
+python3 tools/hmknxctl.py -g 192.168.1.10 -d 1.1.5 identify
+
+# Komplette Konfiguration aus dem Gerät lesen (als YAML)
+python3 tools/hmknxctl.py -g 192.168.1.10 -d 1.1.5 read -o config.yaml
+
+# Konfiguration aus YAML schreiben - erst als Trockenlauf prüfen
+python3 tools/hmknxctl.py -g 192.168.1.10 -d 1.1.5 write -c config.yaml --dry-run
+```
+
+Weitere Unterbefehle: `find` (Geräte im Programmiermodus suchen), `set-pa`
+(phys. Adresse programmieren), `progmode`, `restart`, `dump-raw`. `-g` und `-d`
+sind Pflicht (außer bei `find`, das kein Zielgerät braucht).
