@@ -149,3 +149,32 @@ Die DCA-AddIn ergänzt im ETS einen Konfigurations-Tab für das Gerät.
    eigene KNX-Lizenz braucht die App nicht (sie ist Freeware). Erscheint der Tab
    nicht: prüfen, dass das Gerät (nicht der Gebäude-Knoten) ausgewählt ist, und
    ETS6 einmal neu starten.
+
+## Verwendung: Gerät programmieren
+
+Das Gerät wird **nicht** über den gewohnten ETS-Download programmiert (die
+Firmware mit Maske 0x0021 kennt die Standard-LoadProcedure nicht). Die
+Gruppenadressen kommen stattdessen über den DCA-Tab aufs Gerät:
+
+1. **Gruppenadressen zuweisen** - in der ETS-Ansicht „Kommunikationsobjekte"
+   den KOs die Gruppenadressen zuordnen, genau wie bei jedem anderen Gerät. Sie
+   erscheinen anschließend automatisch in der Spalte „GAs" des DCA-Tabs. In der
+   DCA selbst lassen sich **keine** GAs eintippen - die Liste dient nur der
+   Anzeige.
+2. **Auf das Gerät schreiben** - im DCA-Tab auf **„Write to Device"**. Das
+   überträgt die Gruppenadressen samt Flags auf das Gerät und ist damit der
+   eigentliche „Download" für dieses Gerät. Voraussetzung: Die Busverbindung in
+   ETS ist online und das Gerät ist unter seiner phys. Adresse erreichbar.
+
+Die weiteren Knöpfe im Tab:
+
+- **Read from Device** liest nur die KO-**Flags** zur Kontrolle zurück, **nicht**
+  die Gruppenadressen. Die GA-Spalte stammt also immer aus dem ETS-Projekt; eine
+  leere Spalte bedeutet lediglich, dass dem Gerät in ETS noch keine
+  Gruppenadressen zugewiesen sind.
+- **Identify** liest die Geräte-Kennung aus (Hersteller, Seriennummer,
+  Order-Info, Applikationsversion).
+- **Restart** startet das Gerät neu, **Toggle ProgMode** schaltet den
+  Programmiermodus um.
+
+Die Ausgabe jeder Aktion erscheint im Log-Feld unten im Tab.
